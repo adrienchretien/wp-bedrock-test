@@ -10,7 +10,7 @@
  * License URI:   http://opensource.org/licenses/MIT
  */
 
-spl_autoload_register(function ($className) {
+function autoloader_autoload($className) {
   $pathParts = array(__DIR__, 'src');
   $className = str_replace('_', '-', $className); // Convention: underscores in class names, hyphens in file names.
   $className = ltrim($className, '\\');
@@ -30,10 +30,10 @@ spl_autoload_register(function ($className) {
   if (file_exists($path)) {
     require_once $path;
   }
-});
+}
+
+spl_autoload_register('autoloader_autoload');
 
 use custom_plugin_root;
-use custom_plugin\custom_plugin;
 
 custom_plugin_root::coucou();
-new custom_plugin();
